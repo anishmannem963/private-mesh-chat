@@ -1,4 +1,3 @@
-
 # PrivateMesh
 
 A decentralized peer to peer messaging platform.
@@ -11,10 +10,11 @@ PrivateMesh is a decentralized messaging application built to give users direct 
 
 ### Anish Mannem
 
-Role: Frontend and Backend Engineer
+Role: Backend Engineer
+Focus: Core backend logic, peer to peer networking integration, component integration, authentication systems, database management, and performance optimization.
 
 ### Kanakavalli Muraharisetty
 
-Role: Frontend and Backend Engineer
-
+Role: Frontend Engineer
+Focus: User interface design, frontend development, responsive layouts, and user experience improvements.
 
