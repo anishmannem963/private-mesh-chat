@@ -6,7 +6,7 @@
 
 ## 👤 Team Members
 
-- **Backend Developer:** Anish Mannem
+- **Backend Developer + E2E Testing:** Anish Mannem
 - **Frontend Developer:** Kanakavalli Muraharisetty
 
 ---
@@ -54,7 +54,7 @@ Acceptance Criteria:
 
 ## 🔧 Issues Addressed This Sprint
 
-### 🔹 Backend (Anish)
+### 🔹 Backend + E2E Testing (Anish)
 1. Implemented CRUD endpoints for Account, Group, Channel, and Message
 2. Implemented search endpoints with fuzzy matching for all resources
 3. Implemented cascaded deletion (deleting a group removes its channels and messages)
@@ -64,6 +64,7 @@ Acceptance Criteria:
 7. Wrote unit tests for all API endpoints
 8. Wrote standalone authentication unit tests
 9. Generated Swagger UI documentation
+10. Wrote Cypress E2E tests covering full app flow, login flow, and registration flow
 
 ### 🔹 Frontend (Kanakavalli)
 1. Implemented dynamic server list with real-time search filtering
@@ -75,13 +76,12 @@ Acceptance Criteria:
 7. Built Registration page
 8. Wrote Vitest unit tests for all components
 9. Wrote Cypress component tests for Login, ServerList, ActiveServer
-10. Wrote Cypress E2E tests for full app flow, login flow, and registration flow
 
 ---
 
 ## ✅ Successfully Completed Tasks
 
-### 🔹 Backend – Anish
+### 🔹 Backend + E2E Testing – Anish
 
 - All CRUD + search endpoints implemented for Account, Group, Channel, Message
 - Challenge-response authentication with RSA public key cryptography
@@ -91,8 +91,9 @@ Acceptance Criteria:
 - Wails desktop framework integrated
 - Swagger UI served at `/v1/swagger-ui/`
 - All 42 backend unit tests passing
+- Cypress E2E tests written covering integrated full-stack user flows
 
-**Backend Files Implemented:**
+**Files Implemented:**
 - `app.go`
 - `main.go`
 - `wails.json`
@@ -118,6 +119,11 @@ Acceptance Criteria:
 - `internal/middleware/logger.go`
 - `tests/api/v1/sector_test.go`
 - `tests/api/v1/auth_standalone_test.go`
+- `frontend/cypress/e2e/app-flow.cy.js`
+- `frontend/cypress/e2e/login-flow.cy.js`
+- `frontend/cypress/e2e/registration.cy.js`
+- `frontend/cypress/support/e2e.js`
+- `frontend/cypress/fixtures/example.json`
 
 ---
 
@@ -129,9 +135,9 @@ Acceptance Criteria:
 - MenuBar with channel selector dropdown and member list toggle
 - Login and Registration pages connected to backend
 - All frontend unit tests passing
-- All Cypress component and E2E tests passing
+- All Cypress component tests passing
 
-**Frontend Files Implemented:**
+**Files Implemented:**
 - `frontend/src/App.jsx`
 - `frontend/src/main.jsx`
 - `frontend/src/index.css`
@@ -160,9 +166,10 @@ Acceptance Criteria:
 - `frontend/cypress/component/ActiveServer.cy.jsx`
 - `frontend/cypress/component/Login.cy.jsx`
 - `frontend/cypress/component/ServerList.cy.jsx`
-- `frontend/cypress/e2e/app-flow.cy.js`
-- `frontend/cypress/e2e/login-flow.cy.js`
-- `frontend/cypress/e2e/registration.cy.js`
+- `frontend/cypress/support/commands.js`
+- `frontend/cypress/support/component-index.html`
+- `frontend/cypress/support/component.js`
+- `frontend/cypress.config.js`
 
 ---
 
