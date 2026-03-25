@@ -1,7 +1,8 @@
 describe('Chat Application Flow', () => {
     beforeEach(() => {
       cy.visit('/');
-      
+
+        
       // Login to access the main application using reliable selectors
       cy.get('input').first().type('testuser');
       cy.get('input[type="password"]').type('password123');

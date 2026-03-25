@@ -16,6 +16,7 @@ import (
 	"github.com/oapi-codegen/runtime/types"
 )
 
+
 var ErrNotFound = errors.New("item for id not found")
 var ErrTooMany = errors.New("too many items for id found")
 
