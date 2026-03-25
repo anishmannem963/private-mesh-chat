@@ -5,6 +5,7 @@ describe("Registration Flow", () => {
     cy.contains("button", "Register").click();
   });
 
+  
   it("displays the registration form", () => {
     cy.contains("Create an Account").should("be.visible");
     // Use more reliable selectors for Material-UI inputs
