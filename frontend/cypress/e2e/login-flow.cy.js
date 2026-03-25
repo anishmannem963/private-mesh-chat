@@ -2,6 +2,7 @@ describe('Login Flow', () => {
     beforeEach(() => {
       cy.visit('/');
     });
+    
   
     it('displays the login form', () => {
       cy.contains('Login').should('be.visible');
