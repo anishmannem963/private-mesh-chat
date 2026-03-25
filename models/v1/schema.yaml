@@ -1,5 +1,6 @@
 openapi: 3.0.0
 info:
+<<<<<<< HEAD
   title: Sector
   version: 1.0.0
   description: The Rest-like API for the Sector application.
@@ -914,3 +915,15 @@ components:
 
 security:
   - BearerAuth: [ ]
+=======
+  title: Sector API
+  version: 1.0.0
+
+paths:
+  /health:
+    get:
+      summary: Health Check
+      responses:
+        '200':
+          description: OK
+>>>>>>> 16d71163fc03febef69e6b7246d7344f430e2936

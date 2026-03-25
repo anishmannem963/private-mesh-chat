@@ -17,3 +17,7 @@ Focus: Core backend logic, peer to peer networking integration, component integr
 
 Role: Frontend Engineer
 Focus: User interface design, frontend development, responsive layouts, and user experience improvements.
+<<<<<<< HEAD
+=======
+
+>>>>>>> 16d71163fc03febef69e6b7246d7344f430e2936

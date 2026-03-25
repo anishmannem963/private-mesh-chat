@@ -13,6 +13,10 @@
   },
   "dependencies": {
     "@emotion/react": "^11.14.0",
+<<<<<<< HEAD
+=======
+    
+>>>>>>> 16d71163fc03febef69e6b7246d7344f430e2936
     "@emotion/styled": "^11.14.0",
     "@mui/icons-material": "^6.4.5",
     "@mui/material": "^6.4.2",
