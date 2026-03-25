@@ -1,0 +1,14 @@
+{
+  "recommendations": [
+    "golang.go",
+    "dbaeumer.vscode-eslint",
+    "esbenp.prettier-vscode",
+    "eamodio.gitlens",
+    "dsznajder.es7-react-js-snippets",
+    "msjsdiag.debugger-for-chrome",
+    "redhat.vscode-yaml",
+    "ms-azuretools.vscode-docker",
+    "cypress.cypress",
+    "orta.vscode-jest"
+  ]
+}

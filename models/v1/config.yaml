@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=https://raw.githubusercontent.com/oapi-codegen/oapi-codegen/HEAD/configuration-schema.json
+package: v1
+output: ./internal/api/v1/sector.gen.go
+generate:
+  gorilla-server: true
+  client: true
+  models: true
+  embedded-spec: true
+output-options:
+  skip-prune: true
+compatibility:
+  apply-gorilla-middleware-first-to-last: true
