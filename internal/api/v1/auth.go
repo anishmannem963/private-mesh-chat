@@ -16,6 +16,7 @@ import (
 	"go.uber.org/zap"
 )
 
+
 // Global challenge store
 var challengeStore = auth.NewChallengeStore()
 
