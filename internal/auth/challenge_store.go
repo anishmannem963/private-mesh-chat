@@ -5,6 +5,7 @@ import (
 	"time"
 )
 
+
 // ChallengeStore manages authentication challenges
 type ChallengeStore struct {
 	challenges map[string]Challenge
