@@ -1,68 +1,165 @@
-## Sprint 1 : SECTOR
+# 🚀 Sprint 1 Report – RideX
 
-## User Stories :
+**Sprint Focus:** Authentication & Basic System Setup
 
-Our user stories, progress, and goals are stored in our repository's issues section (https://github.com/Sn00pyW00dst0ck/CEN5035-Project/issues). For your convenience, a summary has been provided below :
+---
 
-1. **Search Bar**  
-   *As a user, I would like to be able to search for a particular message or content within the application to quickly find relevant information.*  
+# 👤 Team Members
 
-2. **Toggle between Light and Dark Mode**  
-   *As a user, I would like to switch between light and dark modes for better visual comfort and accessibility.*  
+- **Backend Developer:** Anish Mannem
+- **Frontend Developer:** Kanakavalli Muraharisetty
 
-3. **User Profile and Customization**  
-   *As a user, I would like to customize my profile by updating my name, avatar, and other personal details to personalize my experience.*  
+---
 
-4. **User Personalized Status**  
-   *As a user, I would like to set a personalized status so others can see my current availability or custom message.*  
+# 📌 Sprint 1 Goal
 
-5. **Block Users**  
-   *As a user, I would like to block other users to prevent unwanted interactions and maintain my privacy.*  
+The goal of Sprint 1 was to:
 
-6. **Read Receipt**  
-   *As a user, I would like to see when my messages have been read by the recipient to confirm communication status.*  
+- Implement **User Registration**
+- Implement **User Login**
+- Set up basic **frontend routing**
+- Establish **backend API structure**
+- Connect frontend and backend for authentication
+- Ensure users are redirected correctly after login
 
-7. **See other Online Group Members**  
-   *As a user, I would like to see which members of my group are currently online to know who is available for conversation.*  
+---
 
-8. **Multimedia Support in Messages**  
-   *As a user, I would like to send and receive multimedia content, such as images and videos, within messages to enhance communication.*  
+# 📝 User Stories
 
-9. **Group Sharing via QR Code**  
-   *As a user, I would like to generate and scan QR codes to easily invite others to my group.*  
+## 1️⃣ New User Registration
 
-10. **"Login" to same account from multiple devices**  
-   *As a user, I would like to log in to my account from multiple devices so I can access my messages and settings from anywhere.*  
+**As a new user**,
+I want to create an account using my basic details
+So that I can access RideX features.
 
-11. **Login**  
-   *As a user, I would like to securely log into the application to access my account and personalized settings.*  
+### Acceptance Criteria:
 
-12. **Message Verification**  
-   *As a user, I would like to verify the authenticity of messages to ensure they have not been tampered with.*  
+- User can enter name, email, and password
+- Proper validation for missing/invalid fields
+- Success message after registration
+- Redirect to login page after successful registration
 
-13. **Group Chats**  
-   *As a user, I would like to participate in group chats so I can communicate with multiple people at once.*  
+---
 
-14. **Login Capabilities**  
-   *As a user, I would like a reliable login system that securely authenticates my credentials and grants access to my account.*  
+## 2️⃣ Returning User Login
 
+**As a returning user**,
+I want to log in using my email and password
+So that I can access my account quickly.
 
-## Frontend:
+### Acceptance Criteria:
 
-Sprint 1 focused on defining and beginning to implement the frontend. We had three major objectives: identify what features Sector should provide users, create wireframes for how the application should appear to users, and begin implementation of said pages in React. Being that the backend needed to be built largely before we could implement communication between the two, we decided to save frontend-backend interaction until sprint 2. 
+- Login validates user credentials
+- Clear error message for wrong credentials
+- Redirect to dashboard/home after successful login
+- Session/token stored properly
 
-In the first week, we met with the backend engineers and discussed user stories (https://github.com/Sn00pyW00dst0ck/CEN5035-Project/issues?q=label%3A%22user%20story%22). Using these stories, we designed wireframe representations of the main and login pages (https://github.com/Sn00pyW00dst0ck/CEN5035-Project/issues/3). After discussion in a second meeting with the team, we were satisfied with the main page wireframe and began building it in React. 
+---
 
-In a frontend only meeting, we discussed which React component libraries we wanted to use and settled on MUI due to its comprehensiveness and simplicity. A default React template was built, followed by the definition of page layout and elements. Modularity was prioritized so that common elements like user badges could be reused in several contexts, such as the local user's badge and in the member list for servers. It currently features a server selection window, message window, and server member window. Although not complete, the main page closely follows our wireframe designs and scales appropriately to various desktop environments (https://github.com/Sn00pyW00dst0ck/CEN5035-Project/issues/30#issuecomment-2649268217). In addition, we have spoken with the backend developers on what information we want to be available at endpoints and how to access them.
+## 3️⃣ Session Persistence
 
-## Backend: 
+**As a logged-in user**,
+I want to stay logged in even after refreshing the page
+So that I don’t need to log in repeatedly.
 
-The backend Sprint 1 efforts focused primarily on evaluation of tooling & available libraries, determining what technologies we wanted to build the functionality upon, and the development of an initial schema for the various objects which will need to appear in the database to support application functionality. These were all pre-requisites to being able to serve functionality to the frontend application, which the backend team decided would be an end goal (albiet an ambitious one).
+---
 
-In the first week, we met with the frontend engineers and discussed user stories (https://github.com/Sn00pyW00dst0ck/CEN5035-Project/issues?q=label%3A%22user%20story%22). Using these stories, we determined a set of common functionality which would be needed for nearly all of the user stories to be implemented. These were common setup things, such as determining and setting up a database system, determining which libraries (if any) to utilize, and setting up a scalable, maintainable, and easy to utilize development system to support development. To this end, we created some issues (viewable [here](https://github.com/Sn00pyW00dst0ck/CEN5035-Project/issues?q=is%3Aissue%20milestone%3A%22Sprint%201%22%20label%3Abackend)) to serve as the end goal for sprint 1's backend development. 
+# 🔧 Issues Planned to Address
 
-Within backend only meetings, we compared the available libraries that were available and could potentially support our application. Ultimately, due to limitations and the incompleteness of the main P2P messaging library available for Go (called [wesh](https://wesh.network/)), we have decided to build our solution primarily off of [go-orbit-db](https://github.com/berty/go-orbit-db), which is a Go version of [OrbitDB](https://github.com/orbitdb/orbitdb/tree/main). This library will provide a nice way to handle data persistence between users, provide automatic peer discovery, and simplify data consistency issues immensely. 
+## 🔹 Backend (Anish)
 
-Additionally, we decided to generate the gorilla mux backend servers via [oapi-codegen](https://github.com/oapi-codegen/oapi-codegen), which will allow for rapid development of the backend REST-like architecture. Furthermore, the tool [openapi-typescript](https://www.npmjs.com/package/openapi-typescript) is able to generate frontend TypeScript data models from the same specification that oapi-codegen is using to help simplify the integration process between the front and backends. The team meat with the frontend developers to determine what the needs of the system would be and have begun basic implmentations for the data models and routes. Further development efforts will focus primarily on expanding the available routes and documenting these routes. 
+1. Setup Express backend server
+2. Create user model
+3. Implement registration API
+4. Implement login API
+5. Password hashing
+6. JWT token generation
+7. API error handling
+8. Connect backend to database
+9. Test APIs via command line (Postman / VSCode terminal)
 
-Unfortunately, due to the nature of experimenting with and determining the quality of external libraries, quite a lot of time was lost to these efforts. This explains why [Login Capabilities](https://github.com/Sn00pyW00dst0ck/CEN5035-Project/issues/9) were not implemented this sprint, we wanted to have a solid foundation for development and rushing into login implementation without a solid foundation was bound to backfire. We will include this user story as a goal when planning for sprint 2.  
+---
+
+## 🔹 Frontend (Kanakavalli)
+
+1. Setup React + Vite project
+2. Create Login Page UI
+3. Create Registration Page UI
+4. Setup routing using React Router
+5. Connect frontend to backend APIs
+6. Handle form validation
+7. Store authentication token
+8. Redirect user after login
+9. Basic dashboard/home page after login
+
+---
+
+# ✅ Successfully Completed Tasks
+
+## 🔹 Backend – Anish
+
+- Express server setup completed
+- User model created
+- Registration API implemented
+- Login API implemented
+- Password hashing using bcrypt
+- JWT token generation implemented
+- Proper error handling for invalid login
+- Database connected successfully
+- APIs tested successfully via command line
+
+### Backend Files Implemented:
+
+- `server.js`
+- `routes/auth.js`
+- `controllers/authController.js`
+- `models/User.js`
+- `middleware/authMiddleware.js`
+- `.env`
+- `config/db.js`
+
+---
+
+## 🔹 Frontend – Kanakavalli
+
+- React + Vite setup completed
+- Login page designed
+- Registration page designed
+- Routing implemented
+- API integration completed
+- Token storage handled
+- Successful redirect after login
+- Basic Home/Dashboard page created
+
+### Frontend Files Implemented:
+
+- `App.jsx`
+- `main.jsx`
+- `pages/Login.jsx`
+- `pages/Register.jsx`
+- `pages/Home.jsx`
+- `services/api.js`
+- `components/AuthForm.jsx`
+
+---
+
+# 🎯 Sprint 1 Outcome
+
+✔ Fully working authentication flow
+✔ Frontend and backend successfully integrated
+✔ Users can register, login, and be redirected properly
+✔ Project structure established for future development
+
+---
+
+# 📂 Demo Resources
+
+Backend and frontend demo videos available in Youtube:
+(
+Frontend: https://youtu.be/FT0pl3Au7zU
+Backend: https://youtu.be/Abl4yf8sf5Q
+)
+
+---
+
+---

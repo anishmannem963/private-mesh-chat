@@ -1,382 +1,630 @@
-# Sprint 2 — Sector
+# 🚀 Sprint 2 Report – PrivateMesh
 
-## Video
-
-https://www.youtube.com/watch?v=ji-p_NHyHpk
+## Sprint Focus: API Development, Testing & Frontend-Backend Integration
 
 ---
 
-## General Notes
+## 👤 Team Members
 
-Sprint 2 focused on two parallel tracks: expanding and testing the frontend UI components, and completing the core backend API with comprehensive unit tests and documentation. The frontend and backend have been able to communicate since Sprint 1 via HTTP requests, and this sprint built on that foundation to deepen integration.
-
-The backend ran into a significant blocker: mocking the underlying IPFS instance for unit testing is substantially more involved than anticipated, requiring a mock `libp2p` network and a test IPFS node rather than a simple in-memory stub. This slowed test coverage expansion and delayed some API route completions, particularly around cascaded deletes (e.g., deleting a group must also remove its channels and their messages). Future sprints will address authentication and encryption on top of the working API layer.
-
----
-
-## Frontend
-
-### Work Completed
-
-**User Badge**
-Designed and implemented a flexible `UserBadge` component used throughout the interface. The badge is now interactable, showing the user's name and icon with a placeholder action that will be replaced by a detailed profile dropdown in a later sprint.
-
-**Search Component**
-A standardized `Search` component was developed for reuse across the interface. It accepts a custom `id`, `label`, and `return` callback, making it straightforward to wire up to any list for real-time filtering.
-
-**Dynamic Server List**
-The server list was upgraded to consume an array of server objects (suitable for fetching from the backend). It integrates the `Search` component for real-time name filtering and emits `onServerSelect` and `onChannelSelect` callbacks when the user interacts with entries.
-
-**Active Server Top Bar (MenuBar)**
-Added a menu bar at the top of the active server view. It includes a `ServerBadge` displaying the active server's name and icon, a `Search` component for filtering messages, a channel selector dropdown, and a toggle button to show or hide the member list.
-
-**Dynamic Member List**
-Added toggle functionality to the member list panel. Clicking the menu button in the top bar shows or hides the member list, keeping the message area usable at any window width.
-
-**CSS / Layout Fixes**
-Resolved wrapping and overflow issues that caused components to render incorrectly at non-standard window aspect ratios. The layout now scales correctly across a wide range of desktop window sizes.
+- **Backend Developer + E2E Testing:** Anish Mannem
+- **Frontend Developer:** Kanakavalli Muraharisetty
 
 ---
 
-### Frontend Unit Tests
+## 📌 Sprint 2 Goal
 
-Unit tests are written using **Vitest** with **@testing-library/react** and are located in `frontend/src/test/`. Run all unit tests from the `frontend/` directory:
+The goal of Sprint 2 was to:
+
+- Complete all core backend API endpoints (Account, Group, Channel, Message)
+- Write comprehensive backend unit tests
+- Write frontend unit tests for all components
+- Write Cypress component and E2E tests
+- Integrate the frontend and backend so they communicate over HTTP
+- Document the full backend API in this file
+
+---
+
+## 📝 User Stories
+
+### 1️⃣ Group Chats
+
+_As a user, I would like to participate in group chats so I can communicate with multiple people at once._
+
+Acceptance Criteria:
+
+- Users can create a group (server)
+- Users can be added as members of a group
+- Groups can be retrieved and updated
+
+### 2️⃣ Login
+
+_As a user, I would like to securely log into the application to access my account and personalized settings._
+
+Acceptance Criteria:
+
+- User can enter a username and password
+- Backend issues a challenge and verifies the signed response
+- A JWT token is returned on successful login
+- Protected routes reject requests without a valid token
+
+### 3️⃣ Search Bar
+
+_As a user, I would like to be able to search for a particular message or content within the application._
+
+Acceptance Criteria:
+
+- Server list can be filtered in real time by name
+- Search component is reusable across the interface
+
+---
+
+## 🔧 Issues Addressed This Sprint
+
+### 🔹 Backend + E2E Testing (Anish)
+
+1. Implemented CRUD endpoints for Account, Group, Channel, and Message
+2. Implemented search endpoints with fuzzy matching for all resources
+3. Implemented cascaded deletion (deleting a group removes its channels and messages)
+4. Implemented JWT authentication and challenge-response login
+5. Added JWT middleware to protect all non-public routes
+6. Integrated Wails framework for desktop app packaging
+7. Wrote unit tests for all API endpoints
+8. Wrote standalone authentication unit tests
+9. Generated Swagger UI documentation
+10. Wrote Cypress E2E tests covering full app flow, login flow, and registration flow
+
+### 🔹 Frontend (Kanakavalli)
+
+1. Implemented dynamic server list with real-time search filtering
+2. Built reusable Search component
+3. Built UserBadge and ServerBadge components
+4. Built ActiveServer view with message display and input
+5. Built MenuBar with channel selector and member list toggle
+6. Built Login page with username/password form
+7. Built Registration page
+8. Wrote Vitest unit tests for all components
+9. Wrote Cypress component tests for Login, ServerList, ActiveServer
+
+---
+
+## ✅ Successfully Completed Tasks
+
+### 🔹 Backend + E2E Testing – Anish
+
+- All CRUD + search endpoints implemented for Account, Group, Channel, Message
+- Challenge-response authentication with RSA public key cryptography
+- JWT token generation and middleware-based route protection
+- Cascaded delete logic maintaining data consistency
+- Fuzzy search using `lithammer/fuzzysearch`
+- Wails desktop framework integrated
+- Swagger UI served at `/v1/swagger-ui/`
+- All 42 backend unit tests passing
+- Cypress E2E tests written covering integrated full-stack user flows
+
+**Files Implemented:**
+
+- `app.go`
+- `main.go`
+- `wails.json`
+- `go.mod` / `go.sum`
+- `sample.env`
+- `generate.sh`
+- `models/v1/schema.yaml`
+- `models/v1/config.yaml`
+- `internal/api/api.go`
+- `internal/api/v1/sector.go`
+- `internal/api/v1/sector.gen.go`
+- `internal/api/v1/operations.go`
+- `internal/api/v1/auth.go`
+- `internal/api/v1/swagger-ui.html`
+- `internal/auth/jwt.go`
+- `internal/auth/challenge_store.go`
+- `internal/config/config.go`
+- `internal/database/database.go`
+- `internal/database/ipfs_helpers.go`
+- `internal/database/mock_ipfs_helpers.go`
+- `internal/logger/logger.go`
+- `internal/middleware/auth.go`
+- `internal/middleware/logger.go`
+- `tests/api/v1/sector_test.go`
+- `tests/api/v1/auth_standalone_test.go`
+- `frontend/cypress/e2e/app-flow.cy.js`
+- `frontend/cypress/e2e/login-flow.cy.js`
+- `frontend/cypress/e2e/registration.cy.js`
+- `frontend/cypress/support/e2e.js`
+- `frontend/cypress/fixtures/example.json`
+
+---
+
+### 🔹 Frontend – Kanakavalli
+
+- Dynamic server list with search filtering
+- Reusable Search, UserBadge, ServerBadge components
+- ActiveServer chat view with message display and send
+- MenuBar with channel selector dropdown and member list toggle
+- Login and Registration pages connected to backend
+- All frontend unit tests passing
+- All Cypress component tests passing
+
+**Files Implemented:**
+
+- `frontend/src/App.jsx`
+- `frontend/src/main.jsx`
+- `frontend/src/index.css`
+- `frontend/src/Login/Login.jsx`
+- `frontend/src/Registration/Registration.jsx`
+- `frontend/src/MainScreen/MainScreen.jsx`
+- `frontend/src/MainScreen/ServerList/ServerList.jsx`
+- `frontend/src/MainScreen/ServerList/ServerBadge/ServerBadge.jsx`
+- `frontend/src/MainScreen/ServerAndMembers/ServerAndMembers.jsx`
+- `frontend/src/MainScreen/ServerAndMembers/ActiveServer/ActiveServer.jsx`
+- `frontend/src/MainScreen/ServerAndMembers/ActiveServer/MenuBar/MenuBar.jsx`
+- `frontend/src/MainScreen/ServerAndMembers/Members/Members.jsx`
+- `frontend/src/CommonComponents/Search/Search.jsx`
+- `frontend/src/UserBadge/UserBadge.jsx`
+- `frontend/src/test/ActiveServer.test.jsx`
+- `frontend/src/test/App.test.jsx`
+- `frontend/src/test/Login.test.jsx`
+- `frontend/src/test/MainScreen.test.jsx`
+- `frontend/src/test/MenuBar.test.jsx`
+- `frontend/src/test/Registration.test.jsx`
+- `frontend/src/test/Search.test.jsx`
+- `frontend/src/test/ServerAndMembers.test.jsx`
+- `frontend/src/test/ServerBadge.test.jsx`
+- `frontend/src/test/ServerList.test.jsx`
+- `frontend/src/test/UserBadge.test.jsx`
+- `frontend/cypress/component/ActiveServer.cy.jsx`
+- `frontend/cypress/component/Login.cy.jsx`
+- `frontend/cypress/component/ServerList.cy.jsx`
+- `frontend/cypress/support/commands.js`
+- `frontend/cypress/support/component-index.html`
+- `frontend/cypress/support/component.js`
+- `frontend/cypress.config.js`
+
+---
+
+## 🧪 Frontend Unit Tests (Vitest)
+
+Run from `frontend/` directory:
 
 ```
 npm run test
 ```
 
-#### UserBadge.test.jsx
-| Test | Description |
-|---|---|
-| Renders without exceptions | Mounts `UserBadge` with no props and verifies no error is thrown |
-| Renders user name | Passes `user="testName"` and confirms the name appears in the DOM |
-| Renders default icon | Confirms the `img` element uses `userDefault.png` when no `img` prop is passed |
-| Renders provided icon | Confirms the `img` element uses the passed `img` prop value |
+### ActiveServer.test.jsx
 
-#### ServerBadge.test.jsx
-| Test | Description |
-|---|---|
-| Renders without exceptions | Mounts `ServerBadge` with no props and verifies no error is thrown |
-| Renders server name | Passes a server object and confirms the name renders |
-| Renders default icon | Confirms `serverDefault.png` is used when no icon is supplied |
-| Renders provided icon | Confirms the server object's `icon` path is used when supplied |
+- Renders a placeholder when no server is selected
+- Renders the main chat interface when a server is selected
+- Passes the correct props to MenuBar
+- Displays messages correctly
+- Forwards channel selection from MenuBar
+- Allows sending messages when a server and channel are selected
+- Does not send empty messages
+- Handles message sending via Enter key
+- Does not call onChannelSelect when no channel is selected
 
-#### Search.test.jsx
-| Test | Description |
-|---|---|
-| Renders without crashing | Mounts `Search` and confirms the text field is present |
-| Has default id and label | Confirms the field defaults to `id="Search"` and `label="Search"` |
-| Accepts custom id and label | Passes custom `id` and `label` props and confirms they are applied |
-| Calls return function on change | Fires a change event and confirms the `return` callback is invoked |
+### App.test.jsx
 
-#### ServerList.test.jsx
-| Test | Description |
-|---|---|
-| Renders without exceptions | Mounts `ServerList` with a server array and verifies no error is thrown |
-| Renders all test servers | Confirms every server name in the test array appears in the rendered list |
-| Search filters servers | Types a query into the search field and verifies only matching servers remain |
-| Selecting a server calls callbacks | Clicks a server entry and verifies both `onServerSelect` and `onChannelSelect` are called with the correct arguments |
-| Clicking a channel calls onChannelSelect | Expands a server and clicks a channel name; verifies `onChannelSelect` is called |
-| Adding a new channel works | Selects a server, enters a channel name in the add-channel field, submits, and verifies the callback fires |
-| Visual indication on selected channel | Verifies the selected channel entry receives an active style class |
+- Renders without exceptions
+
+### Login.test.jsx
+
+- Renders login form with Username, Password, Sign In, and Register elements
+- Prevents login when form fields are empty
+- Calls onLogin with valid credentials
+- Calls onRegisterClick when Register button is clicked
+
+### MainScreen.test.jsx
+
+- Renders without crashing
+- Initializes with no selected server and channel
+- Updates the selected server and channel when a server is selected
+- Updates the selected channel when a channel is selected from the server list
+- Updates the selected channel when a channel is selected from the dropdown menu
+- Loads messages when a server and channel are selected
+- Retains channel selection when changing between servers
+- Handles state updates properly when changing channels
+
+### MenuBar.test.jsx
+
+- Renders without crashing
+- Renders ServerBadge with correct props
+- Renders search component with correct label
+- Renders menu button with icon
+- Calls setVisible with opposite value when menu button is clicked
+- Displays the selected channel name in the channel button
+- Displays "select channel" when no channel is selected
+- Opens the channel menu when the channel button is clicked
+- Selects a channel when a menu item is clicked
+- Marks the current selected channel as selected in the menu
+- Handles the case when selected server has no channels
+- Handles the case when selectedServer is null
+
+### Registration.test.jsx
+
+- Renders registration form with all required fields and buttons
+- Validates empty and invalid form inputs
+- Submits registration form with valid input and sends correct API request
+- Displays success message on successful registration
+- Displays error message when registration fails
+- Navigates to login page when Login button is clicked
+
+### Search.test.jsx
+
+- Renders without crashing
+- Uses default id and label when none are provided
+- Accepts and displays custom id and label props
+- Calls provided return function on input change
+
+### ServerAndMembers.test.jsx
+
+- Renders without crashing
+- Passes the correct props to ActiveServer
+- Does not render Members by default (visible is false)
+- Renders Members when visible state is true
+- Forwards channel selection to parent component
+- Handles null server and channel gracefully
+
+### ServerBadge.test.jsx
+
+- Renders without exceptions
+- Renders server name
+- Renders default server icon
+- Renders provided server icon
+
+### ServerList.test.jsx
+
+- Renders without exceptions
+- Server list renders all test servers
+- Search filters servers returned
+- Selecting a server calls onServerSelect and onChannelSelect with default channel
+- Clicking on a channel calls onChannelSelect
+- Adding a new channel works
+- Visual indication is applied to the selected channel
+
+### UserBadge.test.jsx
+
+- Renders without exceptions
+- Renders user name
+- Renders default user icon
+- Renders provided user icon
 
 ---
 
-### Cypress Component Tests
+## 🌲 Cypress Component Tests
 
-Cypress component tests are located in `frontend/cypress/component/`. Run them from the `frontend/` directory:
-
-```
-npx cypress open --component
-```
-
-or headlessly:
+Run from `frontend/` directory:
 
 ```
 npx cypress run --component
 ```
 
-#### Login.cy.jsx
-| Test | Description |
-|---|---|
-| Renders the login form correctly | Verifies the heading, username input, password input, Sign In button, and Register button are all visible |
-| Prevents login with empty fields | Clicks Sign In without filling any fields; confirms `onLogin` is not called |
-| Allows login with valid credentials | Fills in username and password, clicks Sign In, confirms `onLogin` is called |
-| Navigates to registration | Clicks the Register button and confirms `onRegisterClick` is called |
+**Final results: ✔ All specs passed — 14 tests, 13 passing, 1 pending**
 
-#### ServerList.cy.jsx
-| Test | Description |
-|---|---|
-| Displays all servers initially | Confirms every server name in the test array is visible on mount |
-| Filters servers based on search input | Types `test1` in the search box; confirms matching servers remain and non-matching ones disappear |
-| Selects a server and its first channel | Clicks a server entry; confirms both `onServerSelect` and `onChannelSelect` stubs are called |
-| Can add a new channel | Selects a server, clicks `+ Add Channel`, types a name, and confirms the `onServerSelect` stub is called with updated data |
+| Spec                | Tests | Passing | Pending |
+| ------------------- | ----- | ------- | ------- |
+| ActiveServer.cy.jsx | 3     | 3       | 0       |
+| Login.cy.jsx        | 5     | 5       | 0       |
+| ServerList.cy.jsx   | 6     | 5       | 1       |
 
-#### ActiveServer.cy.jsx
-| Test | Description |
-|---|---|
-| Displays placeholder when no server is selected | Mounts with `selectedServer={null}` and confirms the "Select a server" message is visible |
-| Displays chat interface with server and channel | Mounts with a server and channel; confirms messages and the message input are visible |
-| Allows sending messages | Types a message and clicks Send; confirms the input clears and the send action fires |
+### ActiveServer.cy.jsx — 3/3 passing ✅
 
----
+- displays a placeholder when no server is selected
+- displays the chat interface when a server and channel are selected
+- allows sending messages
 
-## Backend
+### Login.cy.jsx — 5/5 passing ✅
 
-### Work Completed
+- renders the login form correctly
+- prevents login with empty fields
+- allows login with valid credentials
+- navigates to registration when Register button is clicked
+- debug input fields
 
-**Core API Routes**
-All primary CRUD endpoints for `Account`, `Group`, `Channel`, and `Message` resources were implemented and are operational. This includes create, read, update, delete, and search operations for each resource.
+### ServerList.cy.jsx — 5/5 passing, 1 pending ✅
 
-**Data Consistency**
-Implemented cascaded deletion logic — deleting a `Group` removes all of its `Channel` entries and their associated `Message` entries. Deleting a `Channel` removes its `Message` entries. This logic lives in `internal/api/v1/operations.go`.
-
-**Search with Fuzzy Matching**
-The search endpoints accept a filter body and perform fuzzy matching on string fields using the `lithammer/fuzzysearch` library, supporting partial and case-insensitive queries for names, usernames, and message content.
-
-**Swagger UI**
-API documentation is auto-generated and served at `http://localhost:3000/v1/swagger-ui/` while the server is running. A PDF export is included in the repository: [Swagger UI.pdf](Swagger%20UI.pdf).
+- displays all servers initially
+- filters servers based on search input
+- selects a server and its first channel when clicked
+- can add a new channel to a selected server
+- debug selectors
+- _(pending)_ allows editing user profile — deferred to Sprint 3
 
 ---
 
-### Backend Unit Tests
+## 🌐 Cypress E2E Tests
 
-Unit tests use the standard **Go testing framework** and are located in `tests/api/v1/`. A mock IPFS node and in-memory OrbitDB instance are used so tests run without a live IPFS daemon. Run from the repository root:
+Start the frontend dev server first, then run from `frontend/`:
 
 ```
-go test -p 1 ./...
+npm run dev             # Terminal 1
+npx cypress run --e2e   # Terminal 2
 ```
 
-#### Account Management (`sector_test.go`)
-| Test | Description |
-|---|---|
-| TestPutAccount | Creates an account via `PUT /v1/api/account/` and verifies a 201 response with the created account body |
-| TestGetAccountByID | Retrieves a previously created account by UUID and verifies all fields match |
-| TestUpdateAccountByID | Updates account fields (username, description) and verifies the response reflects the changes |
-| TestDeleteAccountByID | Deletes an account and confirms a subsequent GET returns 404 |
-| TestSearchAccounts | Searches by username and verifies only matching accounts are returned |
+**Final results: ✔ All specs passed — 15 tests, 13 passing, 2 pending**
 
-#### Group Management (`sector_test.go`)
-| Test | Description |
-|---|---|
-| TestPutGroup | Creates a group and verifies the 201 response |
-| TestGetGroupByID | Retrieves a group by UUID and confirms fields match |
-| TestUpdateGroupByID | Updates group name and description; verifies the response |
-| TestDeleteGroupByID | Deletes a group and confirms cascaded removal of its channels |
-| TestSearchGroups | Searches groups by name; verifies only matching groups are returned |
-| TestAddMemberToGroup | Adds a member account to an existing group; verifies the member appears in the group's member list |
-| TestRemoveMemberFromGroup | Removes a member and verifies they no longer appear in the group |
+| Spec               | Tests | Passing | Pending |
+| ------------------ | ----- | ------- | ------- |
+| app-flow.cy.js     | 6     | 6       | 0       |
+| login-flow.cy.js   | 4     | 4       | 0       |
+| registration.cy.js | 5     | 3       | 2       |
 
-#### Channel Management (`sector_test.go`)
-| Test | Description |
-|---|---|
-| TestPutChannel | Creates a channel within a group; verifies 201 and correct group association |
-| TestGetChannelByID | Retrieves a channel by UUID and verifies fields |
-| TestUpdateChannelByID | Updates channel name; verifies the response |
-| TestDeleteChannelByID | Deletes a channel and confirms its messages are also removed |
-| TestSearchChannels | Searches channels by group ID and name; verifies results |
+### app-flow.cy.js — 6/6 passing ✅
 
-#### Message Management (`sector_test.go`)
-| Test | Description |
-|---|---|
-| TestPutMessage | Creates a message in a channel; verifies 201 and correct channel/author association |
-| TestGetMessageByID | Retrieves a message by UUID and verifies all fields |
-| TestUpdateMessageByID | Updates message body content; verifies the change is persisted |
-| TestDeleteMessageByID | Deletes a message; confirms a subsequent GET returns 404 |
-| TestSearchMessages | Searches messages by channel ID, author, and content; verifies filter accuracy |
+- allows server selection and displays channels
+- allows channel selection and message sending
+- allows adding a new channel
+- allows toggling members sidebar
+- can search for servers
+- debug UI elements
+
+### login-flow.cy.js — 4/4 passing ✅
+
+- displays the login form
+- prevents login with empty fields
+- allows navigation to registration page
+- handles login and displays the main screen
+
+### registration.cy.js — 3/3 passing, 2 pending ✅
+
+- displays the registration form
+- navigates back to login
+- debug registration form fields and buttons
+- _(pending)_ validates form fields correctly — deferred to Sprint 3
+- _(pending)_ attempts registration with valid data — deferred to Sprint 3
 
 ---
 
-## Backend API Documentation
+## 🧪 Backend Unit Tests (Go)
 
-The API is served from `http://localhost:3000` during development (`wails dev`). All endpoints are prefixed with `/v1/api`. A live Swagger UI is available at `/v1/swagger-ui/` and a PDF export is included in this repository.
+Run from project root:
 
-All endpoints except `/v1/api/`, `/v1/api/health`, `/v1/api/challenge`, and `/v1/api/login` require a `Bearer` JWT in the `Authorization` header.
+```
+go test -p 1 -v ./...
+```
+
+**Final results: PASS — 42 tests, 0 failures — completed in 2.258s**
+
+### Authentication Tests (auth_standalone_test.go)
+
+- Authentication Flow
+- JWT Token Persistence
+- Invalid Authentication Attempts
+
+### Root & Health (sector_test.go)
+
+- Get Root
+- Get Health
+
+### Account Management
+
+- Create Account
+- Update Account By Id
+- Delete Account By Id
+- Get By Id
+- Search Accounts / By Id
+- Search Accounts / By creation time
+- Search Accounts / By username
+
+### Group Management
+
+- Create Group
+- Update Group By Id
+- Delete Group By Id
+- Get Group By Id
+- Search Groups / By Id
+- Search Groups / By creation time
+- Search Groups / By name
+- Search Groups / By members
+- Add Member
+- Remove Member
+
+### Channel Management
+
+- Create Channel
+- Update Channel By Id
+- Delete Channel By Id
+- Get Channel By Id
+- Search Channels / By Id
+- Search Channels / By creation time
+- Search Channels / By name
+- Search Channels / By group
+
+### Message Management
+
+- Create Message
+- Update Message By Id
+- Delete Message By Id
+- Get Message By Id
+- Search Message / By Id
+- Search Message / By creation time
+- Search Message / By author
+- Search Message / By channel
+- Search Message / By pinned
+- Search Message / By body
+
+### Authentication Middleware
+
+- Test Unauthenticated Access
+- Test Authentication Flow
+
+---
+
+## 📖 Backend API Documentation
+
+The API runs on `http://localhost:3000` during development (`wails dev`).
+All endpoints are prefixed with `/v1/api`.
+Live Swagger UI is available at `http://localhost:3000/v1/swagger-ui/`.
+
+All endpoints except `/v1/api/`, `/v1/api/health`, `/v1/api/challenge`, and `/v1/api/login` require a JWT token in the `Authorization` header as `Bearer {token}`.
 
 ---
 
 ### Authentication
 
 #### `GET /v1/api/challenge`
-Issues a one-time challenge string that the client must sign with their RSA private key to prove identity.
+
+Issues a one-time challenge string for the client to sign with their RSA private key.
 
 **Query parameters**
-- `username` (string, required) — the username whose challenge should be generated
+
+- `username` (string, required)
 
 **Response `200 OK`**
+
 ```json
 { "challenge": "<base64-encoded random bytes>" }
 ```
 
-**Error responses**
-- `400 Bad Request` — username not provided
-- `404 Not Found` — no account with that username exists
+**Errors:** `400` username missing · `404` user not found
 
 ---
 
 #### `POST /v1/api/login`
-Authenticates a user by verifying their signed challenge and returns a JWT token.
+
+Verifies the signed challenge and returns a JWT token.
 
 **Request body**
+
 ```json
 {
   "username": "alice",
-  "signature": "<base64-encoded RSA-SHA256 signature of the challenge>"
+  "signature": "<base64-encoded RSA-SHA256 signature>"
 }
 ```
 
 **Response `200 OK`**
+
 ```json
 { "token": "<JWT>" }
 ```
 
-**Error responses**
-- `400 Bad Request` — malformed body or no active challenge for the user
-- `401 Unauthorized` — signature verification failed
-- `404 Not Found` — user not found
+**Errors:** `400` bad body or no active challenge · `401` bad signature · `404` user not found
 
 ---
 
 ### Account
 
 #### `POST /v1/api/account/`
+
 Creates a new user account.
 
 **Request body**
+
 ```json
 {
   "username": "alice",
   "pubkey": "-----BEGIN PUBLIC KEY-----\n...\n-----END PUBLIC KEY-----",
-  "icon": "<base64-encoded image or empty string>",
+  "icon": "",
   "description": "Hey there!"
 }
 ```
 
-**Response `201 Created`** — the created account object including its generated `id` and `created_at`.
+**Response `201 Created`** — created account object with generated `id` and `created_at`.
 
 ---
 
 #### `GET /v1/api/account/{id}`
+
 Retrieves an account by UUID.
-
-**Path parameters**
-- `id` (UUID, required)
-
-**Response `200 OK`** — the account object.
-
-**Error responses**
-- `404 Not Found` — no account with that ID
+**Response `200 OK`** — account object. **`404`** if not found.
 
 ---
 
 #### `PUT /v1/api/account/{id}`
-Replaces an account's fields. All writable fields must be supplied.
 
-**Path parameters**
-- `id` (UUID, required)
-
-**Request body** — same shape as the creation body.
-
-**Response `200 OK`** — the updated account object.
+Updates an account. All writable fields must be supplied.
+**Response `200 OK`** — updated account object.
 
 ---
 
 #### `DELETE /v1/api/account/{id}`
+
 Deletes an account.
-
-**Path parameters**
-- `id` (UUID, required)
-
 **Response `204 No Content`**
 
 ---
 
 #### `POST /v1/api/account/search`
-Searches for accounts using a filter.
+
+Searches accounts. All fields optional; strings use fuzzy matching.
 
 **Request body**
-```json
-{
-  "username": "ali",
-  "created_after": "2024-01-01T00:00:00Z",
-  "created_before": "2025-01-01T00:00:00Z"
-}
-```
-All fields are optional; omitted fields are not filtered on. String fields use fuzzy matching.
 
-**Response `200 OK`** — array of matching account objects.
+```json
+{ "username": "ali" }
+```
+
+**Response `200 OK`** — array of matching accounts.
 
 ---
 
 ### Group
 
 #### `POST /v1/api/group/`
-Creates a new group (server).
+
+Creates a new group.
 
 **Request body**
+
 ```json
 {
   "name": "My Server",
   "description": "A place for us",
-  "icon": "<base64-encoded image or empty string>",
+  "icon": "",
   "members": []
 }
 ```
 
-**Response `201 Created`** — the created group object.
+**Response `201 Created`** — created group object.
 
 ---
 
 #### `GET /v1/api/group/{groupId}`
-Retrieves a group by UUID.
 
-**Response `200 OK`** — the group object including its `members` array.
+Retrieves a group by UUID.
+**Response `200 OK`** — group object including `members` array.
 
 ---
 
 #### `PUT /v1/api/group/{groupId}`
-Replaces a group's fields.
 
-**Response `200 OK`** — the updated group object.
+Updates a group.
+**Response `200 OK`** — updated group object.
 
 ---
 
 #### `DELETE /v1/api/group/{groupId}`
-Deletes a group and cascades deletion to all its channels and messages.
 
+Deletes a group and cascades deletion to all its channels and messages.
 **Response `204 No Content`**
 
 ---
 
 #### `POST /v1/api/group/search`
-Searches for groups.
+
+Searches groups.
 
 **Request body**
+
 ```json
-{
-  "name": "server",
-  "member_id": "<UUID of a member>"
-}
+{ "name": "server", "member_id": "<UUID>" }
 ```
 
-**Response `200 OK`** — array of matching group objects.
+**Response `200 OK`** — array of matching groups.
 
 ---
 
 #### `POST /v1/api/group/{groupId}/members/{memberId}`
-Adds an existing account as a member of a group.
 
-**Response `200 OK`** — the updated group object.
-
-**Error responses**
-- `404 Not Found` — group or account not found
+Adds an existing account as a group member.
+**Response `200 OK`** — updated group object.
 
 ---
 
 #### `DELETE /v1/api/group/{groupId}/members/{memberId}`
-Removes a member from a group.
 
+Removes a member from a group.
 **Response `204 No Content`**
 
 ---
@@ -384,65 +632,62 @@ Removes a member from a group.
 ### Channel
 
 #### `POST /v1/api/group/{groupId}/channel/`
-Creates a new channel within a group.
+
+Creates a channel inside a group.
 
 **Request body**
+
 ```json
-{
-  "name": "general",
-  "description": "General discussion"
-}
+{ "name": "general", "description": "General discussion" }
 ```
 
-**Response `201 Created`** — the created channel object, including `group` (UUID of parent group).
-
-**Error responses**
-- `404 Not Found` — parent group not found
+**Response `201 Created`** — created channel object with `group` UUID.
 
 ---
 
 #### `GET /v1/api/group/{groupId}/channel/{channelId}`
-Retrieves a channel.
 
-**Response `200 OK`** — the channel object.
+Retrieves a channel.
+**Response `200 OK`** — channel object.
 
 ---
 
 #### `PUT /v1/api/group/{groupId}/channel/{channelId}`
-Replaces a channel's fields.
 
-**Response `200 OK`** — the updated channel object.
+Updates a channel.
+**Response `200 OK`** — updated channel object.
 
 ---
 
 #### `DELETE /v1/api/group/{groupId}/channel/{channelId}`
-Deletes a channel and all messages within it.
 
+Deletes a channel and all its messages.
 **Response `204 No Content`**
 
 ---
 
 #### `POST /v1/api/channel/search`
-Searches for channels across all groups.
+
+Searches channels across all groups.
 
 **Request body**
+
 ```json
-{
-  "name": "general",
-  "group_id": "<UUID>"
-}
+{ "name": "general", "group_id": "<UUID>" }
 ```
 
-**Response `200 OK`** — array of matching channel objects.
+**Response `200 OK`** — array of matching channels.
 
 ---
 
 ### Message
 
 #### `POST /v1/api/group/{groupId}/channel/{channelId}/message`
-Creates a new message in a channel.
+
+Creates a message in a channel.
 
 **Request body**
+
 ```json
 {
   "body": "Hello, world!",
@@ -451,58 +696,68 @@ Creates a new message in a channel.
 }
 ```
 
-**Response `201 Created`** — the created message object.
-
-**Error responses**
-- `404 Not Found` — channel or author account not found
+**Response `201 Created`** — created message object.
 
 ---
 
 #### `GET /v1/api/group/{groupId}/channel/{channelId}/message/{messageId}`
-Retrieves a message.
 
-**Response `200 OK`** — the message object.
+Retrieves a message.
+**Response `200 OK`** — message object.
 
 ---
 
 #### `PUT /v1/api/group/{groupId}/channel/{channelId}/message/{messageId}`
-Replaces a message's fields (e.g., to support editing or pinning).
 
-**Response `200 OK`** — the updated message object.
+Updates a message (edit body, pin/unpin).
+**Response `200 OK`** — updated message object.
 
 ---
 
 #### `DELETE /v1/api/group/{groupId}/channel/{channelId}/message/{messageId}`
-Deletes a message.
 
+Deletes a message.
 **Response `204 No Content`**
 
 ---
 
 #### `POST /v1/api/message/search`
-Searches for messages across all channels.
+
+Searches messages across all channels. All fields optional; strings use fuzzy matching.
 
 **Request body**
+
 ```json
 {
   "body": "hello",
   "author_id": "<UUID>",
   "channel_id": "<UUID>",
-  "pinned": true,
-  "created_after": "2024-01-01T00:00:00Z"
+  "pinned": true
 }
 ```
 
-All fields are optional. String fields use fuzzy matching.
-
-**Response `200 OK`** — array of matching message objects.
+**Response `200 OK`** — array of matching messages.
 
 ---
 
 ### Miscellaneous
 
 #### `GET /v1/api/`
-Root endpoint. Returns a plain-text welcome message. No authentication required.
+
+Root endpoint. Returns a plain-text welcome message. No auth required.
 
 #### `GET /v1/api/health`
-Health check. Returns `200 OK` if the server is running. No authentication required.
+
+Health check. Returns `200 OK` if the server is running. No auth required.
+
+---
+
+## 🎯 Sprint 2 Outcome
+
+✔ Full backend API implemented and documented  
+✔ 42 backend unit tests passing  
+✔ 13 Cypress component tests passing (1 pending — deferred to Sprint 3)  
+✔ 13 Cypress E2E tests passing (2 pending — deferred to Sprint 3)  
+✔ Frontend unit tests written for all 11 components  
+✔ Frontend and backend fully integrated over HTTP  
+✔ Desktop app packaged via Wails framework
