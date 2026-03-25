@@ -4,6 +4,7 @@ go 1.23.0
 
 toolchain go1.23.4
 
+
 require (
 	berty.tech/go-orbit-db v1.22.1
 	github.com/felixge/httpsnoop v1.0.4
