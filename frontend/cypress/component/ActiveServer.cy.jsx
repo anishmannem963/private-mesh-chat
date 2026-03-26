@@ -79,3 +79,4 @@ describe('ActiveServer Component', () => {
     cy.get('input[placeholder="Text Message"]').should('have.value', '');
   });
 });
+
