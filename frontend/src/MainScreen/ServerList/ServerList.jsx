@@ -25,6 +25,14 @@ function ProfileEditModal({
   const [editedUser, setEditedUser] = useState({ ...user });
   const [selectedImage, setSelectedImage] = useState(null);
 
+    // Reset local state every time the modal opens
+  React.useEffect(() => {
+    if (open) {
+      setEditedUser({ ...user });
+      setSelectedImage(null);
+    }
+  }, [open, user]);
+  
   const handleImageChange = (event) => {
     const file = event.target.files[0];
     if (file) {

@@ -185,4 +185,72 @@ describe('ServerList Component', () => {
         
         expect(onChannelSelectMock).toHaveBeenCalledWith("General");
     });
+    test("Opens the profile edit modal when Edit button is clicked", () => {
+        render(
+            <ServerList
+                servers={servers}
+                onServerSelect={onServerSelectMock}
+                onChannelSelect={onChannelSelectMock}
+            />
+        );
+        fireEvent.click(screen.getByText("Edit"));
+        expect(screen.getByText("Edit Profile")).toBeInTheDocument();
+    });
+
+    test("Profile edit modal displays current username", () => {
+        render(
+            <ServerList
+                servers={servers}
+                onServerSelect={onServerSelectMock}
+                onChannelSelect={onChannelSelectMock}
+            />
+        );
+        fireEvent.click(screen.getByText("Edit"));
+        const usernameField = screen.getByLabelText("Username");
+        expect(usernameField.value).toBe("Your Username");
+    });
+
+    test("Saves updated username after editing profile", () => {
+        render(
+            <ServerList
+                servers={servers}
+                onServerSelect={onServerSelectMock}
+                onChannelSelect={onChannelSelectMock}
+            />
+        );
+        fireEvent.click(screen.getByText("Edit"));
+        const usernameField = screen.getByLabelText("Username");
+        fireEvent.change(usernameField, { target: { value: "NewUsername" } });
+        fireEvent.click(screen.getByText("Save"));
+        expect(screen.queryByText("Edit Profile")).not.toBeInTheDocument();
+        expect(screen.getByText("NewUsername")).toBeInTheDocument();
+    });
+
+    test("Closes modal without saving when Cancel is clicked", () => {
+        render(
+            <ServerList
+                servers={servers}
+                onServerSelect={onServerSelectMock}
+                onChannelSelect={onChannelSelectMock}
+            />
+        );
+        fireEvent.click(screen.getByText("Edit"));
+        const usernameField = screen.getByLabelText("Username");
+        fireEvent.change(usernameField, { target: { value: "ShouldNotSave" } });
+        fireEvent.click(screen.getByText("Cancel"));
+        expect(screen.queryByText("Edit Profile")).not.toBeInTheDocument();
+        expect(screen.queryByText("ShouldNotSave")).not.toBeInTheDocument();
+        expect(screen.getByText("Your Username")).toBeInTheDocument();
+    });
+
+    test("Status dot is visible in the sidebar", () => {
+        render(
+            <ServerList
+                servers={servers}
+                onServerSelect={onServerSelectMock}
+                onChannelSelect={onChannelSelectMock}
+            />
+        );
+        expect(screen.getByText("Online")).toBeInTheDocument();
+    });
 });

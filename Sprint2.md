@@ -675,11 +675,3 @@ Health check. Returns `200 OK` if the server is running. No auth required.
 ✔ Frontend unit tests written for all 11 components  
 ✔ Frontend and backend fully integrated over HTTP  
 ✔ Desktop app packaged via Wails framework
-
-
-
-
-
-Youtube Links:
-Anish - https://youtu.be/3FOo4wqg2n8
-Kanakavalli - https://youtu.be/OTIpWIzeiFs , https://youtu.be/smO7NImiuq8

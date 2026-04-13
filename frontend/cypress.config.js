@@ -11,7 +11,7 @@ export default defineConfig({
     specPattern: "cypress/component/**/*.cy.{js,jsx,ts,tsx}",
     setupNodeEvents(on, config) {
       // Implement component testing node events here
-      on('task', {
+      on("task", {
         log(message) {
           console.log(message);
           return null;
@@ -21,13 +21,13 @@ export default defineConfig({
   },
 
   e2e: {
-    baseUrl: 'http://localhost:5173', // Update this to match your Vite dev server port
+    baseUrl: "http://localhost:5173", // Update this to match your Vite dev server port
     viewportWidth: 1280,
     viewportHeight: 800,
     specPattern: "cypress/e2e/**/*.cy.{js,jsx,ts,tsx}",
     setupNodeEvents(on, config) {
       // Implement e2e testing node events here
-      on('task', {
+      on("task", {
         log(message) {
           console.log(message);
           return null;
@@ -35,7 +35,7 @@ export default defineConfig({
       });
     },
   },
-  
+
   // Global configuration
   includeShadowDom: true,
   defaultCommandTimeout: 6000,

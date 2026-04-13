@@ -90,15 +90,16 @@ describe('ServerList Component', () => {
     });
   });
 
-  it.skip('allows editing user profile', () => {
+  it('allows editing user profile', () => {
     // Find and click the Edit button for user profile
     cy.contains('button', 'Edit').click();
     
     // Verify the profile edit modal appears
     cy.contains('Edit Profile').should('be.visible');
     
-    // Change the username
-    cy.get('input').eq(1).clear().type('New Username');
+    // Change the username using the labeled input
+    cy.get('input[aria-label="Username"], label:contains("Username") + div input')
+      .first().clear().type('New Username');
     
     // Save changes
     cy.contains('button', 'Save').click();
