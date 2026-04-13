@@ -23,7 +23,11 @@ jobs:
       - uses: actions/checkout@v4
         with:
           submodules: recursive
-
+      - name: Setup Go
+        uses: actions/setup-go@v5
+        with:
+          go-version: '1.26.x'
+          
       - uses: dAppServer/wails-build-action@main
         with:
           build-name: ${{ matrix.build.name }}
