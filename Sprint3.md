@@ -721,3 +721,9 @@ Health check. Returns `200 OK` if the server is running. No auth required.
 ✔ New Vitest test file `ProfileEditModal.test.jsx` — 12 tests  
 ✔ New Vitest test file `CustomUserBadge.test.jsx` — 14 tests  
 ✔ Registration E2E validation fully covered with `cy.intercept` for backend independence
+
+
+
+Video link
+Anish - https://github.com/anishmannem963/private-mesh-chat
+Kanakavalli - 
