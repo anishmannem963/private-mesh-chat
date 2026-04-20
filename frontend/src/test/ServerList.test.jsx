@@ -11,6 +11,7 @@ const servers = [
     { id: 6, name: "Alice",        icon: "public/vite.svg", channels: ["1", "2", "3"] },
 ];
 
+
 describe('ServerList Component', () => {
     let onServerSelectMock;
     let onChannelSelectMock;
