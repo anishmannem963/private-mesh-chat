@@ -18,6 +18,7 @@ import * as React from 'react';
  *     background-color style — reliable regardless of text duplication.
  */
 
+
 const servers = [
   { id: 1, name: 'test1', icon: 'public/vite.svg', channels: ['General'] },
 ];
