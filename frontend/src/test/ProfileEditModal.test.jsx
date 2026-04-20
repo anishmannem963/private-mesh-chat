@@ -17,6 +17,7 @@ import * as React from 'react';
  *     to avoid clashing with sidebar elements that share the same text.
  */
 
+
 const servers = [
   { id: 1, name: 'test1', icon: 'public/vite.svg', channels: ['General'] },
 ];
