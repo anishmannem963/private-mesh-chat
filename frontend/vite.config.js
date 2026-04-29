@@ -8,5 +8,12 @@ export default defineConfig({
     globals: true,
     environment: "jsdom",
     setupFiles: "./src/test/setup.js",
+    // Exclude Cypress files so Vitest never picks them up as test suites
+    exclude: [
+      "**/node_modules/**",
+      "**/dist/**",
+      "**/*.cy.{js,jsx,ts,tsx}",
+      "**/cypress/**",
+    ],
   },
 });
